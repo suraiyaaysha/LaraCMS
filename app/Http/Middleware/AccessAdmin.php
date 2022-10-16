@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+// Asa
+use Auth;
+
+class AccessAdmin
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     */
+    public function handle(Request $request, Closure $next)
+    {
+        // Asa
+        if(Auth::check() &&
+            Auth::user()->hasAnyRole(['admin', 'editor', 'author'])) {
+                return $next($request);
+            }
+            return redirect('home');
+        // Asa
+
+
+        // return $next($request);
+    }
+}
