@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center"> 
         <div class="col-md-8">
             <a href="{{ route('admin.pages.create')}}" class="text-primary btn btn-default">Create new</a>
             <table class="table">
