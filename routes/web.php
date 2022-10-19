@@ -25,3 +25,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin', function() {
     return 'you are an admin, editor, author';
 })->middleware('admin');
+
+// Route::resource('/admin/pages/', 'Admin\PagesController');
+Route::get('/admin/pages', [App\Http\Controllers\Admin\PagesController::class, 'index'])->name('admin.pages');
+Route::get('/admin/pages/create', [App\Http\Controllers\Admin\PagesController::class, 'create'])->name('admin.pages.create');
+Route::get('/admin/pages/edit/{$id}', [App\Http\Controllers\Admin\PagesController::class, 'edit']);
+
+// Route::get('/home', 'HomeController@index')->name('home');
