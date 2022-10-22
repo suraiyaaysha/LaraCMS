@@ -30,7 +30,37 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        @guest
 
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Pages
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('pages.index') }}">
+                                        Page List
+                                    </a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('pages.create') }}">
+                                        Create New Page
+                                    </a>
+                                </div>
+                            </li>
+                            {{-- @can('manageUsers', App\User::class)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Manage Users
+                                </a>
+                            </li>
+                            @endcan --}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">
+                                    Manage Users
+                                </a>
+                            </li>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->

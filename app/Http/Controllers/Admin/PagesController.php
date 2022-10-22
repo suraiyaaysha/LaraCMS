@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
+// Asa
+use Auth;
+// Asa
+
 use App\Http\Controllers\Controller;
 use App\Models\Page;
+// Asa
+use App\Http\Requests\WorkWithPage;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+
+    // This method for Protecting Admin Route
+    public function __construct() {
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +27,26 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $pages = Page::all();
+        // --Secure by Middleware--
+        // if(Auth::user()->hasAnyRole(['admin', 'editor'])) {
+        //     $pages = Page::all();
+        // }
+        // else {
+        //     $pages = Auth::user()->pages()->get();
+        // }
         // return view('admin.pages.index', ['pages' => $pages]);
-        return view('admin.pages.index', compact('pages'));
+        // // return view('admin.pages.index', compact('pages'));
+
+
+        // ---Secure by Helping function---
+        if(Auth::user()->isAdminOrEditor()) {
+            $pages = Page::all();
+        }
+        else {
+            $pages = Auth::user()->pages()->get();
+        }
+        return view('admin.pages.index', ['pages' => $pages]);
+        // return view('admin.pages.index', compact('pages'));
     }
 
     /**
@@ -27,7 +56,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.create');
+        return view('admin.pages.create')->with(['model' => new Page()]);
     }
 
     /**
@@ -36,21 +65,28 @@ class PagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    public function store(WorkWithPage $request)
     {
-        //
+        // Auth::User()->pages()->save($request->all());
+        Auth::user()->pages()->save(
+            new Page($request->only(['title', 'url', 'content']))
+        );
+        // return redirect()->back();
+        
+        return redirect()->route('pages.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Page $page)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  \App\Models\Page  $page
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show(Page $page)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -60,7 +96,14 @@ class PagesController extends Controller
      */
     public function edit(Page $page)
     {
-        return view('admin.pages.edit');
+        // return view('admin.pages.edit', ['model' => $page]);
+
+        // ---- Secured by Policy System ----
+        if(Auth::user()->cannot('update', $page)) {
+            return redirect()->route('pages.index');
+        }
+        return view('admin.pages.edit', ['model' => $page]);
+        // ---- Secured by Policy System ----
     }
 
     /**
@@ -70,9 +113,17 @@ class PagesController extends Controller
      * @param  \App\Models\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $page)
+    // public function update(Request $request, Page $page)
+    public function update(WorkWithPage $request, Page $page)
     {
-        //
+        if(Auth::user()->cannot('update', $page)) {
+            return redirect()->route('pages.index');
+        }
+
+        $page->fill($request->only(['title', 'url', 'content']));
+
+        $page->save();
+        return redirect()->route('pages.index');
     }
 
     /**
@@ -83,6 +134,8 @@ class PagesController extends Controller
      */
     public function destroy(Page $page)
     {
-        //
+        if(Auth::user()->cannot('delete', $page)) {
+            return redirect()->route('pages.index');
+        }
     }
 }
