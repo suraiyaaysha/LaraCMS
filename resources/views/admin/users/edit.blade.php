@@ -4,9 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>{{ $model->name }}</h1>
-            <form action="{{ route('users.update', ['user'=>$model->id]) }}" method="POST">
+            <h1>Edit {{ $model->name }}</h1>
+            <form action="{{ route('users.update', ['user'=> $model->id]) }}" method="POST">
                 {{ method_field('PUT') }}
+                {!! csrf_field() !!}
                 @foreach ($roles as $role)
                 <div class="checkbox">
                     <label>
