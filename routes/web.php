@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UsersController;
 
 /*
@@ -36,6 +37,10 @@ Route::get('/admin', function() {
 // Route::get('/admin/pages/edit/{$id}', [App\Http\Controllers\Admin\PagesController::class, 'edit'])->name('admin.pages.edit');
 
 Route::resource('admin/pages', PagesController::class, [
+    'except'=>['show']
+])->middleware('admin');
+
+Route::resource('admin/blog', BlogController::class, [
     'except'=>['show']
 ])->middleware('admin');
 

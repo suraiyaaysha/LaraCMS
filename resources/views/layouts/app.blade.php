@@ -48,6 +48,21 @@
                                     </a>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Blog Posts
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('blog.index') }}">
+                                        Post List
+                                    </a>
+                                    
+                                    <a class="dropdown-item" href="{{ route('blog.create') }}">
+                                        Create New Post
+                                    </a>
+                                </div>
+                            </li>
                             {{-- @can('manageUsers', App\User::class)
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
