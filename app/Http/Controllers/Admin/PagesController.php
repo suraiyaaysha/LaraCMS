@@ -40,10 +40,12 @@ class PagesController extends Controller
 
         // ---Secure by Helping function---
         if(Auth::user()->isAdminOrEditor()) {
-            $pages = Page::all();
+            // $pages = Page::all();
+            $pages = Page::paginate(5);
         }
         else {
-            $pages = Auth::user()->pages()->get();
+            // $pages = Auth::user()->pages()->get();
+            $pages = Auth::user()->pages()->paginate(5);
         }
         return view('admin.pages.index', ['pages' => $pages]);
         // return view('admin.pages.index', compact('pages'));
@@ -74,7 +76,8 @@ class PagesController extends Controller
         );
         // return redirect()->back();
         
-        return redirect()->route('pages.index');
+        // return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('status', 'The page has been created');
     }
 
     // /**
@@ -123,7 +126,8 @@ class PagesController extends Controller
         $page->fill($request->only(['title', 'url', 'content']));
 
         $page->save();
-        return redirect()->route('pages.index');
+        // return redirect()->route('pages.index');
+        return redirect()->route('pages.index')->with('status', 'The page was updated');
     }
 
     /**

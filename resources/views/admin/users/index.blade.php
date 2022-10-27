@@ -4,6 +4,12 @@
 <div class="container">
     <div class="row justify-content-center"> 
         <div class="col-md-8">
+            @if(session('status'))
+                <div class="alert alert-info">
+                {{ session('status') }}
+            </div>
+            @endif
+
             {{-- <a href="{{ route('users.create')}}" class="btn btn-primary">Create new User</a>
             <hr> --}}
             <table class="table">
@@ -25,6 +31,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $model->links() }}
         </div>
     </div>
 </div>
