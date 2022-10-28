@@ -28,13 +28,23 @@
     </div>
 
     <div class="form-group">
-        <label for="url">URL</label>
-        <input type="text" class="form-control" id="url" name="url" value="{{$model->url}}">
+        <label for="slug">Slug</label>
+        <input type="text" class="form-control" id="slug" name="slug" value="{{$model->slug}}">
     </div>
 
     <div class="form-group">
-        <label for="title">Content</label>
-        <textarea class="form-control" id="content" name="content">{{$model->content}}</textarea>
+        <label for="published_at">Published Date/Time</label>
+        <input type="text" class="form-control" id="published_at" name="published_at">{{$model->published_at}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="excerpt">Excerpt</label>
+        <textarea class="form-control" id="excerpt" name="excerpt">{{$model->excerpt}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="body">Body Content</label>
+        <textarea class="form-control" id="body" name="body">{{$model->body}}</textarea>
     </div>
 
     <div class="form-group">

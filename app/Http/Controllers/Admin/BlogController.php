@@ -44,7 +44,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.blog.create')->with('model', new Post());
     }
 
     /**
@@ -55,7 +55,12 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->posts()->save(
+            new Post($request->only(['title', 'slug',
+            'published_at', 'excerpt', 'body']))
+        );
+
+        return redirect()->route('blog.index')->with('status', 'The post was created');
     }
 
     /**
@@ -87,7 +92,7 @@ class BlogController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdateBlogRequest $request, Post $post)
     {
         //
     }
