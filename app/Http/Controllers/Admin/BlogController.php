@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
 
 // Asa
 use Auth;
@@ -53,7 +55,8 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
         Auth::user()->posts()->save(
             new Post($request->only(['title', 'slug',
@@ -80,9 +83,10 @@ class BlogController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    // public function edit(Post $post)
+    public function edit(Post $blog)
     {
-        //
+        return view('admin.blog.edit')->with('model', $blog);
     }
 
     /**
@@ -92,9 +96,15 @@ class BlogController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBlogRequest $request, Post $post)
+    public function update(UpdateBlogRequest $request, Post $blog)
     {
-        //
+        if(Auth::user()->cant('update', $blog)) {
+            return redirect()->route('blog.index')->with('status', 'You do not have permission to edit that post');
+        }
+
+        $blog->fill($request->only(['title', 'slug', 'published_at',
+         'excerpt', 'body']))->save();
+        return redirect()->route('blog.index')->with('status', 'the post was updated');
     }
 
     /**
@@ -103,8 +113,14 @@ class BlogController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $blog)
     {
-        //
+        if(Auth::user()->cant('delete', $blog)) {
+            return redirect()->route('blog.index')->with('status', 'You dont have the premission to delete the post');
+        }
+
+        $blog->delete();
+
+        return redirect()->route('blog.index')->with('status', 'The post was deleted');
     }
 }

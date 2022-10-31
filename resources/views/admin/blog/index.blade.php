@@ -20,6 +20,7 @@
                     <th>Author</th>
                     <th>Slug</th>
                     <th>Published</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     @foreach ($model as $post)
@@ -30,12 +31,29 @@
                         </td>
                         <td>{{ $post->user()->first()->name }}</td>
                         <td>{{ $post->slug }}</td>
+                        <td></td> 
+
+                        <td>
+                            <a href="{{ route('blog.destroy', ['blog'=>$post->id]) }}" 
+                            class="btn btn-danger delete-link"
+                            data-message="Are you sure you want to delete this page?"
+                             data-form="delete-form">
+                            Delete</a>
+                        </td>
+
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             {{ $model->links() }}
         </div>
+
+    <form id="delete-form" action="" method="POST">
+        {{ method_field('DELETE') }}
+        {!! csrf_field() !!}
+
+    </form>
+
     </div>
 </div>
 @endsection

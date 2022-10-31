@@ -27,7 +27,7 @@ class StoreBlogRequest extends FormRequest
             'title'=>'required',
             'slug'=>'required',
             'published_at'=>'nullable|date_format:Y-m-d H:i:s',
-            'excertp'=>'required',
+            'excerpt'=>'required',
             'body'=>'required',
         ];
     }
