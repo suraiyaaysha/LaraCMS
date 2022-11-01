@@ -34,9 +34,26 @@
 
     <div class="form-group">
         <label for="published_at">Published Date/Time</label>
-        <input type="text" class="form-control" id="published_at" name="published_at">{{$model->published_at}}</textarea>
+        <input type="datetime-local" class="form-control" id="published_at" name="published_at" value="{{$model->published_at}}">
     </div>
 
+    {{-- <div class="form-group position-relative">
+        <label for="published_at">Published Date/Time</label>
+        <input
+        type="datetime" 
+        class="form-control datetimepicker-input" 
+        data-target="#published_at"
+        data-toggle="datetimepicker"
+        id="published_at" 
+        name="published_at" value="{{$model->published_at}}">
+    </div> --}}
+
+    {{-- <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div> --}}
     <div class="form-group">
         <label for="excerpt">Excerpt</label>
         <textarea class="form-control" id="excerpt" name="excerpt">{{$model->excerpt}}</textarea>

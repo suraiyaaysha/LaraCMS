@@ -13,7 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    @vite(['resources/sass/app.scss'])
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
 <body>
@@ -122,9 +123,5 @@
         </main>
     </div>
 
-    <!-- Scripts -->
-    @vite(['resources/js/app.js'])
-    {{-- <script src="{{ asset('js/admin-app.js') }}"></script> --}}
-    @yield('scripts')
 </body>
 </html>

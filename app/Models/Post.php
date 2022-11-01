@@ -14,7 +14,8 @@ class Post extends Model
         'title',
         'slug',
         'body',
-        'excerpt'
+        'excerpt',
+        'published_at'
     ];
 
     public function user() {
