@@ -49,7 +49,7 @@
                 <option value=""></option>
 
                 @foreach ($orderPages as $page)
-                    <option value="{{$page->id}}">{{ $page->title }}</option>
+                    <option value="{{$page->id}}">{!! $page->present()->paddedTitle !!}</option>
                 @endforeach
 
             </select>

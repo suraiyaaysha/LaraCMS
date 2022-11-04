@@ -24,7 +24,8 @@
                     <tr>
                         <td>
                             {{-- <a href="{{ url('admin/pages/edit/', $page->id) }}">{{ $page->title }}</a> --}}
-                            <a href="{{ route('pages.edit', $page->id) }}">{{ $page->title }}</a>
+                            {{-- <a href="{{ route('pages.edit', $page->id) }}">{{ $page->title }}</a> --}}
+                            <a href="{{ route('pages.edit', $page->id) }}">{!! $page->present()->paddedTitle !!}</a>
                         </td>
                         <td>{{ $page->url }}</td>
                         <td class="text-right">

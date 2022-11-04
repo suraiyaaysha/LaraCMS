@@ -42,7 +42,7 @@ class PagesController extends Controller
         if(Auth::user()->isAdminOrEditor()) {
             // $pages = Page::all();
             // $pages = Page::paginate(5);
-            $pages = Page::defaultOrder()->paginate(5);
+            $pages = Page::defaultOrder()->withDepth()->paginate(5);
         }
         else {
             // $pages = Auth::user()->pages()->get();

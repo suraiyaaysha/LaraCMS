@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Kalnoy\Nestedset\NodeTrait;
+use Laracasts\Presenter\PresentableTrait;
 
 class Page extends Model
 {
     use HasFactory;
 
     Use NodeTrait;
+    use PresentableTrait;
+
+    protected $presenter = 'App\Presenters\PagePresenter';
 
     // Asa
     protected $fillable = [

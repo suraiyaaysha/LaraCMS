@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,12 @@ use App\Http\Controllers\Admin\UsersController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/', 'HomeController@index');
+Route::get('/', [HomeController::class, 'index']);
+
 
 Auth::routes();
 
