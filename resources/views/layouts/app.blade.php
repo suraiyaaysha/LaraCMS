@@ -123,5 +123,8 @@
         </main>
     </div>
 
+    <script src="{{asset('js/admin-app.js')}}"></script>
+    
+
 </body>
 </html>

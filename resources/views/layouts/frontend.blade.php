@@ -31,6 +31,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+
+                        <li class="nav-item"><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
+
                         @include('partials.nav')
                     </ul>
 

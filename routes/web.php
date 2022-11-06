@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,8 @@ Route::resource('admin/users', UsersController::class,
 )->middleware('admin');
 
 // Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Route::get('/blog', [App\Http\Controllers\BlogPostController::class, 'index'])->name('blog');
+Route::get('/blog', [BlogPostController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [BlogPostController::class, 'view'])->name('blog.view');

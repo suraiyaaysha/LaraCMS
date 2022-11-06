@@ -4,12 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
 
 class Post extends Model
 {
     use HasFactory;
 
-        // Asa
+    // Asa
+    use PresentableTrait;
+    protected $presenter = 'App\Presenters\PostPresenter';
+
+
     protected $fillable = [
         'title',
         'slug',

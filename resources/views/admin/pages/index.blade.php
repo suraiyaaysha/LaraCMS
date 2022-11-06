@@ -29,7 +29,7 @@
                         </td>
                         <td>{{ $page->url }}</td>
                         <td class="text-right">
-                            <a href="{{ route('pages.destroy', ['page'=>$page->id]) }}"
+                            <a href="{{ route('pages.destroy', ['page'=>$page->id]) }}" class="btn btn-danger delete-link"
                             data-message="Are you sure you want to delete this page?"
                              data-form="delete-form">
                             Delete</a>
@@ -39,13 +39,13 @@
                 </tbody>
             </table>
             {{ $pages->links() }}
+
+            <form id="delete-form" action="" method="POST">
+                {{ method_field('DELETE') }}
+                {!! csrf_field() !!}
+            </form>
+
         </div>
-
-    <form id="delete-form" action="" method="POST">
-        {{ method_field('DELETE') }}
-        {!! csrf_field() !!}
-
-    </form>
 
     </div>
 </div>

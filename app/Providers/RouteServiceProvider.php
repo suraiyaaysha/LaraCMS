@@ -35,6 +35,12 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+                // Asa
+                foreach (\App\Models\Page::all() as $page) {
+                    Route::view($page->url, 'home.page', ['page' =>$page]);
+                }
+                // Asa
         });
     }
 

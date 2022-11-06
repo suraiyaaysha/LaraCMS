@@ -24,7 +24,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('home.*', function($view) {
+        View::composer(['home.*', 'blog.*'], function($view) {
             $view->with('pages', \App\Models\Page::get()->toTree());
         });
     }

@@ -79,7 +79,7 @@ class PagesController extends Controller
             new Page($request->only(['title', 'url', 'content']))
         );
 
-        $this->updtePageOrder($page, $request);
+        $this->updatePageOrder($page, $request);
         // return redirect()->back();
         
         // return redirect()->route('pages.index');
